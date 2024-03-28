@@ -1,6 +1,6 @@
 # Java 8 Ball Pool Game
 
-This is a Java implementation of the classic 8 Ball Pool game, developed as a project for Object-Oriented Programming course.
+This is a Java implementation of the classic 8 Ball Pool game, developed as a project for an Object-Oriented Programming course.
 
 ## Dependencies Required:
 1. Java SDK: Liberica JDK 11 Full by BellSoft (Includes both JavaFX and Java)
