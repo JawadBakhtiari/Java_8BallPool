@@ -17,3 +17,8 @@ git clone https://github.com/JawadBakhtiari/Java_8BallPool.git
 2. For your java SDK, select Liberica JDK 11 Full by BellSoft
 
 3. Build and Run using gradle 
+
+# Demo
+
+https://github.com/JawadBakhtiari/Java_8BallPool/assets/126224960/ec13a9d2-1049-4044-8191-05b63222eb37
+
