@@ -50,4 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 8BallPool
-          path: dist/8BallPool/8BallPool.exe
+          path: dist/8BallPool.exe
+
+      - name: List output files
+        run: dir dist /s
