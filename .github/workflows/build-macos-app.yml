@@ -1,0 +1,56 @@
+name: Build macOS APP for 8BallPool
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Download JavaFX SDK
+        run: |
+          curl -L -o javafx-sdk.zip https://download2.gluonhq.com/openjfx/21.0.1/openjfx-21.0.1_osx-x64_bin-sdk.zip
+          unzip javafx-sdk.zip
+          mv javafx-sdk-21.0.1 javafx
+
+      - name: Build JAR
+        run: ./gradlew clean build -x test
+
+      - name: Create custom JavaFX runtime
+        run: |
+          $JAVA_HOME/bin/jlink \
+            --module-path "$JAVA_HOME/jmods:javafx/lib" \
+            --add-modules java.base,java.desktop,javafx.controls,javafx.graphics,javafx.fxml \
+            --output custom-runtime
+
+      - name: Package with jpackage
+        run: |
+          $JAVA_HOME/bin/jpackage \
+            --type app-image \
+            --input build/libs \
+            --name 8BallPool \
+            --main-jar 8BallPoolGradle-1.0-SNAPSHOT.jar \
+            --main-class Main \
+            --runtime-image custom-runtime \
+            --dest dist
+
+      - name: Upload .app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 8BallPool-macOS
+          path: dist/8BallPool-1.0.app
+
+      - name: Show jpackage output
+        run: ls -R dist
