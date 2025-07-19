@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 8BallPool-macOS
-          path: dist/8BallPool.app
+          path: dist/8BallPool
 
       - name: Show jpackage output
         run: ls -R dist
