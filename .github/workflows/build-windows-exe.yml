@@ -43,10 +43,11 @@ jobs:
             --name 8BallPool `
             --main-jar 8BallPoolGradle-1.0-SNAPSHOT.jar `
             --main-class Main `
-            --runtime-image custom-runtime
+            --runtime-image custom-runtime `
+            --dest dist
 
       - name: Upload .exe artifact
         uses: actions/upload-artifact@v4
         with:
-          name: 8BallPool-Windows-Executable
-          path: 8BallPool.exe
+          name: 8BallPool
+          path: dist/8BallPool/8BallPool.exe
