@@ -31,7 +31,7 @@ jobs:
       - name: Create custom JavaFX runtime
         run: |
           $JAVA_HOME/bin/jlink \
-            --module-path "$JAVA_HOME/jmods:javafx/lib" \
+            --module-path "$JAVA_HOME/jmods:javafx" \
             --add-modules java.base,java.desktop,javafx.controls,javafx.fxml \
             --output custom-runtime
 
