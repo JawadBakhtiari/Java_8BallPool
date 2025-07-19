@@ -29,3 +29,21 @@ test {
 application {
     mainClass = 'Main'
 }
+
+application {
+    mainClass = 'Main' // or 'your.package.Main' if you used a package
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes(
+                'Main-Class': 'Main' // or 'your.package.Main' if it's inside a package
+        )
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

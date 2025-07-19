@@ -12,11 +12,11 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
+import java.io.InputStream;
+
 public class Main extends Application {
     public static int screenWidth = 1280;   // 48 * 16 = 768 pixels
     public static int screenHeight = 720;  // 48 * 12 = 576 pixels
-
-
     public Thread gameThread;
     public GraphicsContext gc;
     public Scene scene;
@@ -26,11 +26,12 @@ public class Main extends Application {
     // GameStatus
     public static int score;
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         // IMPORT JSON STUFF
-        gameEngine = new GameEngine(this, "src/main/resources/config.json");
+
+        InputStream in = getClass().getResourceAsStream("/config.json");
+        gameEngine = new GameEngine(this, in);
 
         this.primaryStage = primaryStage;
 

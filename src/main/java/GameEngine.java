@@ -3,7 +3,8 @@ import javafx.scene.paint.Color;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,17 +27,14 @@ public class GameEngine {
     public static Vector poc_BotRight;
 
 
-    public GameEngine(Main gp, String filename) throws Exception {
+    public GameEngine(Main gp, InputStream configStream) throws Exception {
         this.gp = gp;
-        buildTableAndBall(filename);
+        buildTableAndBall(configStream);
         buildWalls();
     }
 
-
-
-    public void buildTableAndBall(String filename) throws Exception {
-
-        JSONObject obj = (JSONObject) new JSONParser().parse(new FileReader(filename));
+    public void buildTableAndBall(InputStream stream) throws Exception {
+        JSONObject obj = (JSONObject) new JSONParser().parse(new InputStreamReader(stream));
 
         // getting Table object info from JSON
         JSONObject tableJSON = (JSONObject) obj.get("Table");
