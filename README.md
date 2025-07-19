@@ -18,6 +18,9 @@ git clone https://github.com/JawadBakhtiari/Java_8BallPool.git
 
 3. Build and Run using gradle 
 
+Or Alternatively you can run it directly on mac by downloading and running the release version
+
+
 # Demo
 
 https://github.com/JawadBakhtiari/Java_8BallPool/assets/126224960/ec13a9d2-1049-4044-8191-05b63222eb37
