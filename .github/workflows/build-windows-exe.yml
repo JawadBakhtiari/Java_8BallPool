@@ -32,7 +32,7 @@ jobs:
         run: |
           jlink `
             --module-path "$env:JAVA_HOME\jmods;javafx\lib" `
-            --add-modules java.base,java.desktop,javafx.controls,javafx.fxml `
+            --add-modules java.base,java.desktop,javafx.controls,javafx.graphics,javafx.fxml `
             --output custom-runtime
 
       - name: Package with jpackage
@@ -54,3 +54,7 @@ jobs:
 
       - name: Show jpackage output
         run: Get-ChildItem -Recurse dist
+
+      - name: Run built EXE (optional)
+        run: |
+          .\dist\8BallPool\8BallPool.exe
