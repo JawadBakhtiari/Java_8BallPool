@@ -21,9 +21,9 @@ jobs:
 
       - name: Download JavaFX SDK
         run: |
-          Invoke-WebRequest -Uri https://download2.gluonhq.com/openjfx/21.0.8/openjfx-21.0.8_windows-x64_bin-jmods.zip -OutFile javafx-jmods.zip
-          Expand-Archive javafx-jmods.zip -DestinationPath .
-          Rename-Item -Path .\javafx-jmods-21.0.8 -NewName javafx
+          Invoke-WebRequest -Uri https://download2.gluonhq.com/openjfx/21.0.1/openjfx-21.0.1_windows-x64_bin-sdk.zip -OutFile javafx-sdk.zip
+          Expand-Archive javafx-sdk.zip -DestinationPath .
+          Rename-Item -Path .\javafx-sdk-21.0.1 -NewName javafx
 
       - name: Build JAR
         run: .\gradlew clean build -x test
@@ -31,8 +31,8 @@ jobs:
       - name: Create custom JavaFX runtime
         run: |
           jlink `
-            --module-path "$env:JAVA_HOME\jmods;javafx" `
-            --add-modules java.base,java.desktop,javafx.controls,javafx.fxml,javafx.graphics `
+            --module-path "$env:JAVA_HOME\jmods;javafx\lib" `
+            --add-modules java.base,java.desktop,javafx.controls,javafx.fxml `
             --output custom-runtime
 
       - name: Package with jpackage
