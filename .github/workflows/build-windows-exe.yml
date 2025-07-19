@@ -19,8 +19,21 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
+      - name: Download JavaFX JMODs
+        run: |
+          Invoke-WebRequest -Uri https://download2.gluonhq.com/openjfx/21.0.8/openjfx-21.0.8_windows-x64_bin-jmods.zip -OutFile javafx-jmods.zip
+          Expand-Archive javafx-jmods.zip -DestinationPath .
+          Rename-Item -Path .\javafx-jmods-21.0.8 -NewName javafx
+
       - name: Build JAR
         run: .\gradlew clean build -x test
+
+      - name: Create custom JavaFX runtime
+        run: |
+          jlink `
+            --module-path "$env:JAVA_HOME\jmods;javafx" `
+            --add-modules java.base,java.desktop,javafx.controls,javafx.fxml `
+            --output custom-runtime
 
       - name: Package with jpackage
         run: |
