@@ -19,11 +19,11 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Download JavaFX JMODs
+      - name: Download JavaFX SDK
         run: |
-          Invoke-WebRequest -Uri https://download2.gluonhq.com/openjfx/21.0.8/openjfx-21.0.8_windows-x64_bin-jmods.zip -OutFile javafx-jmods.zip
-          Expand-Archive javafx-jmods.zip -DestinationPath .
-          Rename-Item -Path .\javafx-jmods-21.0.8 -NewName javafx
+          Invoke-WebRequest -Uri https://download2.gluonhq.com/openjfx/21.0.1/openjfx-21.0.1_windows-x64_bin-sdk.zip -OutFile javafx-sdk.zip
+          Expand-Archive javafx-sdk.zip -DestinationPath .
+          Rename-Item -Path .\javafx-sdk-21.0.1 -NewName javafx
 
       - name: Build JAR
         run: .\gradlew clean build -x test
@@ -31,7 +31,7 @@ jobs:
       - name: Create custom JavaFX runtime
         run: |
           jlink `
-            --module-path "$env:JAVA_HOME\jmods;javafx" `
+            --module-path "$env:JAVA_HOME\jmods;javafx\lib" `
             --add-modules java.base,java.desktop,javafx.controls,javafx.fxml `
             --output custom-runtime
 
@@ -50,11 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 8BallPool
-          path: dist/8BallPool-1.0.exe
+          path: dist/**
 
       - name: Show jpackage output
         run: Get-ChildItem -Recurse dist
-
-      - name: Run built EXE (optional)
-        run: |
-          .\dist\8BallPool-1.0.exe
