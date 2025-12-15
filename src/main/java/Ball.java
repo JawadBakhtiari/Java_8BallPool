@@ -26,7 +26,7 @@ public abstract class Ball {
 
     public Ball(int x, int y, int radius, int vel_x, int vel_y, double mass, double friction, Color color) {
         this.color = color;
-        this.pos = new Vector(x + GameEngine.poc_TopLeft.x,y + GameEngine.poc_TopLeft.y);
+        this.pos = new Vector(x + GameEngine.pocTopLeft.x,y + GameEngine.pocTopLeft.y);
         setBallPos((int) this.pos.x, (int) this.pos.y, radius);
         this.vel = new Vector(vel_x,vel_y);
         this.radius = radius;
@@ -37,17 +37,17 @@ public abstract class Ball {
     }
 
     public void setBallPos(int x, int y, int radius) {
-        if(x <= GameEngine.poc_TopLeft.x)
-            pos.x = GameEngine.poc_TopLeft.x + radius + 1;
-        else if (x >= GameEngine.poc_TopRight.x)
-            pos.x = GameEngine.poc_TopRight.x - radius - 1;
+        if(x <= GameEngine.pocTopLeft.x)
+            pos.x = GameEngine.pocTopLeft.x + radius + 1;
+        else if (x >= GameEngine.pocTopRight.x)
+            pos.x = GameEngine.pocTopRight.x - radius - 1;
         else {
             pos.x = x;
         }
-        if(y<=GameEngine.poc_TopLeft.y)
-            pos.y = GameEngine.poc_TopLeft.y + radius + 1;
-        else if(y>=GameEngine.poc_BotLeft.y)
-            pos.y = GameEngine.poc_BotLeft.y - radius - 1;
+        if(y<=GameEngine.pocTopLeft.y)
+            pos.y = GameEngine.pocTopLeft.y + radius + 1;
+        else if(y>=GameEngine.pocBotLeft.y)
+            pos.y = GameEngine.pocBotLeft.y - radius - 1;
         else {
             pos.y = y;
         }

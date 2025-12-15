@@ -20,11 +20,11 @@ public class GameEngine {
     private boolean gameWon = false;
     private String timer = "0";
 
-    // Corners of table
-    public static Vector poc_TopLeft;
-    public static Vector poc_TopRight;
-    public static Vector poc_BotLeft;
-    public static Vector poc_BotRight;
+    // Table Corner Pockets
+    public static Vector pocTopLeft;
+    public static Vector pocTopRight;
+    public static Vector pocBotLeft;
+    public static Vector pocBotRight;
 
 
     public GameEngine(Main gp, InputStream configStream) throws Exception {
@@ -103,12 +103,12 @@ public class GameEngine {
     public void buildWalls() {
         int pocketSize = 50/scale;
 
-        wallContainer.add(new Wall(poc_TopLeft.x + pocketSize, poc_TopLeft.y, Main.screenWidth / 2 - pocketSize, poc_TopRight.y)); // Top Left
-        wallContainer.add(new Wall(Main.screenWidth / 2 + pocketSize, poc_TopLeft.y, poc_TopRight.x - pocketSize, poc_TopRight.y)); // Top Right
-        wallContainer.add(new Wall(poc_TopRight.x, poc_TopRight.y + pocketSize, poc_BotRight.x, poc_BotRight.y - pocketSize)); // Right Edge
-        wallContainer.add(new Wall(poc_TopLeft.x, poc_TopLeft.y + pocketSize, poc_BotLeft.x, poc_BotLeft.y - pocketSize)); // left Edge
-        wallContainer.add(new Wall(poc_TopLeft.x + pocketSize, poc_BotLeft.y, Main.screenWidth / 2 - pocketSize, poc_BotRight.y)); // bot Left
-        wallContainer.add(new Wall(Main.screenWidth / 2 + pocketSize, poc_BotLeft.y, poc_TopRight.x - pocketSize, poc_BotRight.y)); // bot Right
+        wallContainer.add(new Wall(pocTopLeft.x + pocketSize, pocTopLeft.y, Main.screenWidth / 2 - pocketSize, pocTopRight.y)); // Top Left
+        wallContainer.add(new Wall(Main.screenWidth / 2 + pocketSize, pocTopLeft.y, pocTopRight.x - pocketSize, pocTopRight.y)); // Top Right
+        wallContainer.add(new Wall(pocTopRight.x, pocTopRight.y + pocketSize, pocBotRight.x, pocBotRight.y - pocketSize)); // Right Edge
+        wallContainer.add(new Wall(pocTopLeft.x, pocTopLeft.y + pocketSize, pocBotLeft.x, pocBotLeft.y - pocketSize)); // left Edge
+        wallContainer.add(new Wall(pocTopLeft.x + pocketSize, pocBotLeft.y, Main.screenWidth / 2 - pocketSize, pocBotRight.y)); // bot Left
+        wallContainer.add(new Wall(Main.screenWidth / 2 + pocketSize, pocBotLeft.y, pocTopRight.x - pocketSize, pocBotRight.y)); // bot Right
     }
 
 
@@ -179,9 +179,9 @@ public class GameEngine {
             if(currentTime>1000) {
                 timer = time.substring(0, time.length() - 3);
             }
-            gc.fillText("Score: " + String.valueOf(Main.score), poc_TopRight.x - 75, poc_TopLeft.y - 75);
-            gc.fillText("Time Elapsed: " + timer + " seconds", poc_TopLeft.x + 75, poc_TopLeft.y - 75);
-            gc.fillText("win and bye", poc_TopLeft.x + table.width/2 - 30, poc_TopLeft.y - 75);
+            gc.fillText("Score: " + String.valueOf(Main.score), pocTopRight.x - 75, pocTopLeft.y - 75);
+            gc.fillText("Time Elapsed: " + timer + " seconds", pocTopLeft.x + 75, pocTopLeft.y - 75);
+            gc.fillText("win and bye", pocTopLeft.x + table.width/2 - 30, pocTopLeft.y - 75);
         }
 
         else {
@@ -207,8 +207,8 @@ public class GameEngine {
                 timer = time.substring(0, time.length() - 3);
             }
 
-            gc.fillText("Score: " + String.valueOf(Main.score), poc_TopRight.x - 75, poc_TopLeft.y - 75);
-            gc.fillText("Time Elapsed: " + timer + " seconds", poc_TopLeft.x + 75, poc_TopLeft.y - 75);
+            gc.fillText("Score: " + String.valueOf(Main.score), pocTopRight.x - 75, pocTopLeft.y - 75);
+            gc.fillText("Time Elapsed: " + timer + " seconds", pocTopLeft.x + 75, pocTopLeft.y - 75);
         }
     }
 
@@ -244,7 +244,7 @@ public class GameEngine {
     }
 
     public boolean coll_det_outside(Ball b1) {
-        if(b1.pos.x < poc_TopLeft.x || b1.pos.x > poc_TopRight.x || b1.pos.y < poc_TopRight.y || b1.pos.y > poc_BotRight.y) {
+        if(b1.pos.x < pocTopLeft.x || b1.pos.x > pocTopRight.x || b1.pos.y < pocTopRight.y || b1.pos.y > pocBotRight.y) {
             return true;
         }
         return false;

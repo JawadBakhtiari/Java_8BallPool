@@ -15,8 +15,8 @@ import javafx.util.Duration;
 import java.io.InputStream;
 
 public class Main extends Application {
-    public static int screenWidth = 1280;   // 48 * 16 = 768 pixels
-    public static int screenHeight = 720;  // 48 * 12 = 576 pixels
+    public static int screenWidth;
+    public static int screenHeight;
     public Thread gameThread;
     public GraphicsContext gc;
     public Scene scene;
